@@ -1,4 +1,4 @@
-package ru.itmo.product.api.advice;
+package ru.itmo.common.api.advice;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
