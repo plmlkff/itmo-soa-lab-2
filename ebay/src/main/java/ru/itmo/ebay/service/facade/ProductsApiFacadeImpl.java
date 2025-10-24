@@ -32,11 +32,24 @@ public class ProductsApiFacadeImpl implements ProductsApiFacade{
     public List<ProductDto> getProductsByManufacturerId(int manufacturerId) {
         try {
             return tryGetProductsByManufacturerId(manufacturerId);
-        } catch (ResourceAccessException e){
-            throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, "Products service isn't available now!");
         } catch (RestClientResponseException e){
             throw new ResponseStatusException(e.getStatusCode(), e.getMessage());
         } catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Can not get data from products service!");
+        }
+    }
+
+    @Override
+    @Retryable(
+            maxAttempts = MAX_RETRY_ATTEMPTS,
+            backoff = @Backoff(maxDelay = BACKOFF_MAX_DELAY, multiplier = BACKOFF_MULTIPLIER)
+    )
+    public List<ProductDto> getProductsByPriceRange(int priceFrom, int priceTo) {
+        try {
+            return tryGetProductsByPriceRange(priceFrom, priceTo);
+        } catch (RestClientResponseException e) {
+            throw new ResponseStatusException(e.getStatusCode(), e.getMessage());
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Can not get data from products service!");
         }
     }
@@ -45,6 +58,16 @@ public class ProductsApiFacadeImpl implements ProductsApiFacade{
         return productRestClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/api/products/")
                         .queryParam("ownerIds", manufacturerId)
+                        .build()
+                ).retrieve()
+                .body(new ParameterizedTypeReference<List<ProductDto>>() {});
+    }
+
+    private List<ProductDto> tryGetProductsByPriceRange(int priceFrom, int priceTo){
+        return productRestClient.get()
+                .uri(uriBuilder -> uriBuilder.path("/api/products/")
+                        .queryParam("priceAbove", priceFrom)
+                        .queryParam("priceBelow", priceTo)
                         .build()
                 ).retrieve()
                 .body(new ParameterizedTypeReference<List<ProductDto>>() {});

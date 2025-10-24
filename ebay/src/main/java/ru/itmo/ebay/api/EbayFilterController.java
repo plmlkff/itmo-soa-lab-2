@@ -23,4 +23,14 @@ public class EbayFilterController {
     ) {
         return ebayFilterService.getProductsByManufacturerId(manufacturerId);
     }
+
+    @GetMapping("/price/{price-from}/{price-to}")
+    public List<ProductDto> getProductsByPriceRange(
+            @PathVariable(name = "price-from")
+            int priceFrom,
+            @PathVariable(name = "price-to")
+            int priceTo
+    ) {
+        return ebayFilterService.getProductsByPriceRange(priceFrom, priceTo);
+    }
 }

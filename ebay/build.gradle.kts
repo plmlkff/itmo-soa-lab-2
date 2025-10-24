@@ -11,6 +11,7 @@ repositories{
 
 dependencies{
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-jetty")
     implementation("org.springframework.retry:spring-retry")
     implementation("org.aspectj:aspectjweaver")
     implementation("org.springframework.boot:spring-boot-starter-validation:3.4.3")
@@ -20,6 +21,13 @@ dependencies{
     annotationProcessor("org.projectlombok:lombok")
     implementation(kotlin("stdlib-jdk8"))
 }
+
+configurations{
+    all {
+        exclude(group="org.springframework.boot", module="spring-boot-starter-tomcat")
+    }
+}
+
 kotlin {
     jvmToolchain(21)
 }

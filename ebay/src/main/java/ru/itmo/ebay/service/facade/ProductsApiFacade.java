@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ProductsApiFacade {
     List<ProductDto> getProductsByManufacturerId(int manufacturerId);
+
+    List<ProductDto> getProductsByPriceRange(int priceFrom, int priceTo);
 }

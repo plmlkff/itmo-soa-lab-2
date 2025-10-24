@@ -30,4 +30,17 @@ public class EbayFilterServiceImpl implements EbayFilterService {
 
         return products;
     }
+
+    @Override
+    public List<ProductDto> getProductsByPriceRange(int priceFrom, int priceTo) {
+        if (priceFrom < 1 || priceTo < priceFrom){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Provided values are not valid!");
+        }
+
+        log.info("Getting products with price in range [{}, {}]", priceFrom, priceTo);
+        var products = productsApiFacade.getProductsByPriceRange(priceFrom, priceTo);
+        log.info("Received products: {}", products);
+
+        return products;
+    }
 }
