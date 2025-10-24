@@ -4,7 +4,7 @@ server:
   port: 8081
 spring:
   config:
-    import: file:./product/src/main/resources/.env[.properties]
+    import: .env[.properties]
   application:
     name: "product-service"
   datasource:
