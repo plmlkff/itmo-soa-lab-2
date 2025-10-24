@@ -3,7 +3,7 @@ package ru.itmo.product.service;
 import org.springframework.data.domain.Page;
 import ru.itmo.product.api.dto.ProductDto;
 import ru.itmo.product.entity.Product;
-import ru.itmo.product.entity.filter.ProductFilter;
+import ru.itmo.common.entity.filter.ProductFilter;
 
 public interface ProductService {
     Page<Product> getFilteredProducts(ProductFilter filter);

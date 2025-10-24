@@ -2,7 +2,7 @@ package ru.itmo.product.api.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import ru.itmo.product.entity.Country;
+import ru.itmo.common.entity.Country;
 import ru.itmo.product.entity.Person;
 
 import java.time.LocalDate;

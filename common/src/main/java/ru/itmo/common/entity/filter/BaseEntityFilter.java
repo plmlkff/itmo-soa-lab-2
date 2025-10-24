@@ -1,4 +1,4 @@
-package ru.itmo.product.entity.filter;
+package ru.itmo.common.entity.filter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

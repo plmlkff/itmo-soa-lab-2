@@ -14,7 +14,7 @@ import ru.itmo.product.api.dto.CoordinatesDto;
 import ru.itmo.product.api.dto.ProductDto;
 import ru.itmo.product.entity.Coordinates;
 import ru.itmo.product.entity.Product;
-import ru.itmo.product.entity.filter.ProductFilter;
+import ru.itmo.common.entity.filter.ProductFilter;
 import ru.itmo.product.repository.ProductRepository;
 import ru.itmo.product.repository.specification.ProductSpecificationBuilder;
 import ru.itmo.product.service.ProductService;

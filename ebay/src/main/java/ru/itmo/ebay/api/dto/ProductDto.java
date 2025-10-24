@@ -1,10 +1,9 @@
-package ru.itmo.product.api.dto;
+package ru.itmo.ebay.api.dto;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import ru.itmo.product.entity.Product;
 import ru.itmo.common.entity.UnitOfMeasure;
 
 public record ProductDto(
@@ -28,25 +27,4 @@ public record ProductDto(
         @Valid
         PersonDto owner
 ) {
-    public Product toEntity() {
-        Product product = new Product();
-        product.setName(this.name);
-        product.setCoordinates(this.coordinates.toEntity());
-        product.setPrice(this.price);
-        product.setManufactureCost(this.manufactureCost);
-        product.setUnitOfMeasure(this.unitOfMeasure);
-        product.setOwner(this.owner.toEntity());
-        return product;
-    }
-
-    public static ProductDto fromEntity(Product product) {
-        return new ProductDto(
-                product.getName(),
-                CoordinatesDto.fromEntity(product.getCoordinates()),
-                product.getPrice(),
-                product.getManufactureCost(),
-                product.getUnitOfMeasure(),
-                PersonDto.fromEntity(product.getOwner())
-        );
-    }
 }
