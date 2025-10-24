@@ -16,3 +16,6 @@ project(":product").projectDir = file("product")
 
 include(":ebay")
 project(":ebay").projectDir = file("ebay")
+
+include(":gateway")
+project(":gateway").projectDir = file("gateway")
