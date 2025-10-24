@@ -1,3 +1,7 @@
+server:
+  error:
+    include-message: always
+  port: 8081
 spring:
   config:
     import: file:./product/src/main/resources/.env[.properties]
@@ -13,4 +17,11 @@ spring:
     hibernate:
       ddl-auto: validate
   liquibase:
+    enabled: true
+springdoc:
+  api-docs:
+    path: '/v3/api-docs'
+    enabled: true
+  swagger-ui:
+    path: '/swagger-ui.html'
     enabled: true

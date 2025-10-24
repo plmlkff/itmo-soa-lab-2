@@ -40,7 +40,6 @@ public class Product {
 
     @Column(name = "creation_date", nullable = false)
     @CreationTimestamp
-    @NotNull
     private Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
 
     @Column(nullable = false)
