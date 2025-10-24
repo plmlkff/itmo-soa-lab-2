@@ -38,7 +38,7 @@ public class Product {
     @NotNull
     private Coordinates coordinates; //Поле не может быть null
 
-    @Column(name = "creation_date", nullable = false)
+    @Column(name = "creation_date", nullable = false, columnDefinition = "DATE")
     @CreationTimestamp
     private Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
 

@@ -2,35 +2,36 @@ package ru.itmo.product.api;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.itmo.product.api.dto.ProductDto;
 import ru.itmo.product.entity.filter.ProductFilter;
 import ru.itmo.product.service.ProductService;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/products")
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
 
-    @GetMapping("/products")
-    public Page<ProductDto> getProducts(
+    @GetMapping("/")
+    public List<ProductDto> getProducts(
             ProductFilter productFilter
     ){
-        return productService.getFilteredProducts(productFilter).map(ProductDto::fromEntity);
+        return productService.getFilteredProducts(productFilter).stream()
+                .map(ProductDto::fromEntity)
+                .toList();
     }
 
-    @PostMapping("/products")
+    @PostMapping("/")
     public ProductDto createProduct(
             @Valid
             @RequestBody
@@ -39,8 +40,8 @@ public class ProductController {
         return ProductDto.fromEntity(productService.createProduct(productDto));
     }
 
-    @PutMapping("/products/{id}")
-    public ProductDto createProduct(
+    @PutMapping("/{id}")
+    public ProductDto updateProduct(
             @PathVariable(name = "id")
             int productId,
             @Valid
@@ -50,8 +51,8 @@ public class ProductController {
         return ProductDto.fromEntity(productService.updateProduct(productId, productDto));
     }
 
-    @DeleteMapping("/products/{id}")
-    public void createProduct(
+    @DeleteMapping("/{id}")
+    public void deleteProduct(
             @PathVariable(name = "id")
             int productId
     ){

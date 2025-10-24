@@ -21,7 +21,7 @@ create table products
     manufacture_cost float4,
     owner_id         integer      not null,
     price            integer      not null,
-    creation_date    timestamp    not null,
+    creation_date    date         not null,
     name             varchar(255) not null,
     unit_of_measure  varchar(255),
     constraint products_price_min_value_constr check ( price > 0 ),
