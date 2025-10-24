@@ -3,9 +3,9 @@ package ru.itmo.product.repository.specification;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
-import ru.itmo.product.entity.Country;
+import ru.itmo.common.entity.Country;
 import ru.itmo.product.entity.Product;
-import ru.itmo.product.entity.filter.ProductFilter;
+import ru.itmo.common.entity.filter.ProductFilter;
 
 import java.util.Date;
 import java.util.List;

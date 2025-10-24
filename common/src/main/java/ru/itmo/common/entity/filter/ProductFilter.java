@@ -1,10 +1,10 @@
-package ru.itmo.product.entity.filter;
+package ru.itmo.common.entity.filter;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import ru.itmo.product.entity.Country;
+import ru.itmo.common.entity.Country;
 
 import java.util.Date;
 import java.util.List;
