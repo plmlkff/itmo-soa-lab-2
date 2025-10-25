@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
         var spec = ProductSpecificationBuilder.buildFromFilter(productFilter);
         var sort = productFilter.getSort();
         var pageRequest = productFilter.getPageRequest();
-        pageRequest.withSort(sort);
+        pageRequest = pageRequest.withSort(sort);
 
         return productRepository.findAll(spec, pageRequest);
     }

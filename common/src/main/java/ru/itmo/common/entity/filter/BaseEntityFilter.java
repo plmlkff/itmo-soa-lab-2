@@ -17,7 +17,7 @@ public class BaseEntityFilter{
 
     private List<Integer> ids;
     private List<String> sortBy;
-    private List<Sort.Direction> sortDir;
+    private List<String> sortDir;
     private int limit = DEFAULT_LIMIT;
     private int page = DEFAULT_PAGE;
 
@@ -27,7 +27,7 @@ public class BaseEntityFilter{
         List<Sort.Order> orders = new ArrayList<>();
 
         for (int i = 0; i < sortBy.size(); i++) {
-            orders.add(new Sort.Order(sortDir.get(i), sortBy.get(i)));
+            orders.add(new Sort.Order(Sort.Direction.fromString(sortDir.get(i)), sortBy.get(i)));
         }
 
         return Sort.by(orders);
