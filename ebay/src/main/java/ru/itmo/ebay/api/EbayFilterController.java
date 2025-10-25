@@ -11,7 +11,7 @@ import ru.itmo.ebay.service.EbayFilterService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ebay/filter")
+@RequestMapping("/api/ebay/filter")
 @RequiredArgsConstructor
 public class EbayFilterController {
     private final EbayFilterService ebayFilterService;
