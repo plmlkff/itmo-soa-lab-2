@@ -1,15 +1,16 @@
 server:
   port: 8082
   ssl:
-    key-store-type: PKCS12
-    key-store: classpath:keystore.p12
-    key-store-password: admin
-    key-alias: myapp
+    key-store: classpath:localhost.p12
+    key-store-password: storepassword
+    key-alias: localhost
+    trust-store: classpath:truststore.p12
+    trust-store-password: trustpassword
   error:
     include-message: always
 services:
   product:
-    baseUrl: "http://localhost:8080"
+    baseUrl: "https://localhost:8080"
 springdoc:
   api-docs:
     path: '/v3/api-docs'
