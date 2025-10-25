@@ -17,7 +17,7 @@ dependencies{
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.13")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.apache.httpcomponents.client5:httpclient5")
-    implementation("org.apache.httpcomponents.core5:core5")
+    implementation("org.apache.httpcomponents.core5:httpcore5")
     implementation(project(":common"))
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
