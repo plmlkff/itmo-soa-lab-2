@@ -9,8 +9,9 @@ repositories {
 }
 
 dependencies {
-    // Spring Boot Starters
     implementation("org.springframework.boot:spring-boot-starter")
-    // Spring Cloud Gateway
     implementation("org.springframework.cloud:spring-cloud-starter-gateway:4.2.0")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    compileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
 }

@@ -2,6 +2,11 @@ server:
   error:
     include-message: always
   port: 8081
+  ssl:
+    key-store-type: PKCS12
+    key-store: classpath:keystore.p12
+    key-store-password: admin
+    key-alias: myapp
 spring:
   config:
     import: .env[.properties]

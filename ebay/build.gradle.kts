@@ -15,6 +15,7 @@ dependencies{
     implementation("org.aspectj:aspectjweaver")
     implementation("org.springframework.boot:spring-boot-starter-validation:3.4.3")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.13")
+    implementation("org.springframework.boot:spring-boot-starter-security")
     implementation(project(":common"))
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
