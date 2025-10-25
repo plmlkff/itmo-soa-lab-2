@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Size;
 import ru.itmo.common.entity.UnitOfMeasure;
 
 public record ProductDto(
+        Integer id,
+
         @NotNull(message = "Поле name не может быть null")
         @Size(min = 1, message = "Строка name не может быть пустой")
         String name,

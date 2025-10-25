@@ -28,10 +28,10 @@ import java.security.cert.CertificateException;
 @Configuration
 public class EbayServiceConfig {
 
-    @Value("${server.ssl.trust-store:classpath:truststore.p12}")
+    @Value("${server.ssl.trust-store}")
     private Resource trustStore;
 
-    @Value("${server.ssl.trust-store-password:trustpassword}")
+    @Value("${server.ssl.trust-store-password}")
     private String trustStorePassword;
 
     @Bean(name = "productRestClient")

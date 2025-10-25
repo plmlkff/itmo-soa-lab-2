@@ -88,12 +88,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private void updateCoordinates(Product product, CoordinatesDto coordinatesDto) {
-        // Если coordinates уже есть - обновляем, иначе создаем новые
         Coordinates coordinates = product.getCoordinates();
-        if (coordinates == null) {
-            coordinates = new Coordinates();
-            product.setCoordinates(coordinates);
-        }
         coordinates.setX(coordinatesDto.x());
         coordinates.setY(coordinatesDto.y());
     }

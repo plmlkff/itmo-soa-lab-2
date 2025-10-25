@@ -8,6 +8,8 @@ import ru.itmo.product.entity.Product;
 import ru.itmo.common.entity.UnitOfMeasure;
 
 public record ProductDto(
+        Integer id,
+
         @NotNull(message = "Поле name не может быть null")
         @Size(min = 1, message = "Строка name не может быть пустой")
         String name,
@@ -30,6 +32,7 @@ public record ProductDto(
 ) {
     public Product toEntity() {
         Product product = new Product();
+        product.setId(this.id);
         product.setName(this.name);
         product.setCoordinates(this.coordinates.toEntity());
         product.setPrice(this.price);
@@ -41,6 +44,7 @@ public record ProductDto(
 
     public static ProductDto fromEntity(Product product) {
         return new ProductDto(
+                product.getId(),
                 product.getName(),
                 CoordinatesDto.fromEntity(product.getCoordinates()),
                 product.getPrice(),
