@@ -3,6 +3,7 @@ package ru.itmo.gateway.config;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
@@ -18,9 +19,10 @@ public class SecurityConfig {
 
     @Bean
     @SneakyThrows
-    public SecurityWebFilterChain getSecurityFilterChain(final ServerHttpSecurity httpSecurity) {
+    public SecurityWebFilterChain getSecurityFilterChain(final ServerHttpSecurity httpSecurity, CorsConfigurationSource corsConfigurationSource) {
         return httpSecurity
-                .cors(ServerHttpSecurity.CorsSpec::disable)
+                .csrf(ServerHttpSecurity.CsrfSpec::disable)
+                .cors(corsSpec -> corsSpec.configurationSource(corsConfigurationSource))
                 .authorizeExchange(exchanges -> exchanges.anyExchange().permitAll())
                 .redirectToHttps(redirect -> redirect
                         .httpsRedirectWhen(e -> true) // Все запросы перенаправлять на HTTPS
