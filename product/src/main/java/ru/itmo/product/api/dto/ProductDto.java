@@ -27,7 +27,6 @@ public record ProductDto(
         UnitOfMeasure unitOfMeasure,
 
         @NotNull(message = "Поле owner не может быть null")
-        @Valid
         PersonDto owner
 ) {
     public Product toEntity() {
