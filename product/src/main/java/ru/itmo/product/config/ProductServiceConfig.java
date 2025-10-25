@@ -1,4 +1,4 @@
-package ru.itmo.product;
+package ru.itmo.product.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

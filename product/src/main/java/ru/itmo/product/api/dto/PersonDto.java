@@ -8,7 +8,7 @@ import ru.itmo.product.entity.Person;
 import java.time.LocalDate;
 
 public record PersonDto(
-        int id,
+        Integer id,
 
         @NotNull(message = "Поле name не может быть null")
         @Size(min = 1, message = "Строка name не может быть пустой")
