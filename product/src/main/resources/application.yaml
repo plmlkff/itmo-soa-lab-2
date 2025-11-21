@@ -33,9 +33,6 @@ spring:
         service-name: ${spring.application.name}
         prefer-ip-address: true
         hostname: localhost
-        health-check-interval: 10s
-        health-check-path: /actuator/health
-        health-check-critical-timeout: 30s
         register: true
         deregister: true
         tags:

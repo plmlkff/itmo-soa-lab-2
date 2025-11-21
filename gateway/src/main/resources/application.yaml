@@ -14,23 +14,6 @@ spring:
     consul:
       host: localhost
       port: 8500
-      discovery:
-        enabled: true
-        instance-id: ${spring.application.name}:${server.port}:${random.value}
-        service-name: ${spring.application.name}
-        prefer-ip-address: true
-        hostname: localhost
-        health-check-interval: 10s
-        health-check-path: /actuator/health
-        health-check-critical-timeout: 30s
-        register: true
-        deregister: true
-        tags:
-          - "version=1.0"
-          - "team=soa-lab2"
-          - "environment=development"
-        metadata:
-          description: "API Gateway with service discovery"
     gateway:
       httpclient:
         ssl:
