@@ -33,6 +33,9 @@ spring:
         service-name: ${spring.application.name}
         prefer-ip-address: true
         hostname: localhost
+        health-check-interval: 10s
+        health-check-path: /actuator/health
+        health-check-critical-timeout: 30s
         register: true
         deregister: true
         tags:
@@ -49,3 +52,11 @@ springdoc:
   swagger-ui:
     path: '/swagger-ui.html'
     enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always

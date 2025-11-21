@@ -16,6 +16,7 @@ dependencies{
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.13")
     implementation("org.liquibase:liquibase-core")
     implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery:4.2.0")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation(project(":common"))
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
