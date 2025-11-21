@@ -6,6 +6,7 @@ server:
     key-alias: localhost
     trust-store: classpath:truststore.p12
     trust-store-password: trustpassword
+    enabled: false
   error:
     include-message: always
 services:

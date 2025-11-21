@@ -32,7 +32,12 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(List.of("https://se.ifmo.ru", "https://se.ifmo.ru")); // или конкретные домены
+        configuration.setAllowedOriginPatterns(List.of(
+                "https://se.ifmo.ru",
+                "http://se.ifmo.ru",
+                "http://localhost:*",
+                "https://localhost:*"
+        ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
 //        configuration.setAllowCredentials(true);
