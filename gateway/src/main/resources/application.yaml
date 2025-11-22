@@ -28,6 +28,6 @@ spring:
           predicates:
             - Path=/api/products/**
         - id: ebay-service
-          uri: http://localhost:8082
+          uri: http://localhost:8082/ebay-ejb-web
           predicates:
             - Path=/api/ebay/**

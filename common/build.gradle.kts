@@ -15,3 +15,12 @@ dependencies{
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
 }
+
+// Build as plain JAR, not Spring Boot executable JAR
+tasks.named<Jar>("jar") {
+    enabled = true
+}
+
+tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+    enabled = false
+}

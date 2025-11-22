@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss:jboss xmlns:jboss="http://www.jboss.com/xml/ns/javaee"
+             xmlns="http://java.sun.com/xml/ns/javaee"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pool="urn:ejb-pool:1.0"
+             xsi:schemaLocation="http://www.jboss.com/xml/ns/javaee http://www.jboss.org/j2ee/schema/jboss-ejb3-2_0.xsd
+                                 http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd
+                                 urn:ejb-pool:1.0 http://www.jboss.org/j2ee/schema/jboss-ejb-pool_1_0.xsd"
+             version="3.1">
+
+    <assembly-descriptor>
+        <pool:pool>
+            <ejb-name>EbayFilterServiceBean</ejb-name>
+            <pool:bean-instance-pool-ref>slsb-strict-max-pool</pool:bean-instance-pool-ref>
+        </pool:pool>
+    </assembly-descriptor>
+
+</jboss:jboss>
+
