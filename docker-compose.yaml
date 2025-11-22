@@ -25,3 +25,13 @@ services:
     healthcheck:
       start_period: 1s
       test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
+
+  haproxy:
+    container_name: haproxy
+    image: haproxy:2.9-alpine
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
