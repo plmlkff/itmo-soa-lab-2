@@ -4,22 +4,30 @@ server:
     key-store: classpath:localhost.p12
     key-store-password: storepassword
     key-alias: localhost
+    enabled: false
   error:
     include-message: always
 spring:
   application:
     name: gateway-service
   cloud:
+    consul:
+      host: localhost
+      port: 8500
     gateway:
       httpclient:
         ssl:
           trusted-x509-certificates: classpath:root_ca.crt
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
       routes:
         - id: products-service
-          uri: https://localhost:8081
+          uri: lb://product-service
           predicates:
             - Path=/api/products/**
         - id: ebay-service
-          uri: https://localhost:8082
+          uri: http://localhost:8082
           predicates:
             - Path=/api/ebay/**

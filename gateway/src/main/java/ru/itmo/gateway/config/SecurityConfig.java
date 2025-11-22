@@ -22,17 +22,22 @@ public class SecurityConfig {
         return httpSecurity
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .cors(corsSpec -> corsSpec.configurationSource(corsConfigurationSource))
-                .authorizeExchange(exchanges -> exchanges.anyExchange().permitAll())
-                .redirectToHttps(redirect -> redirect
-                        .httpsRedirectWhen(e -> true) // Все запросы перенаправлять на HTTPS
-                )
+//                .authorizeExchange(exchanges -> exchanges.anyExchange().permitAll())
+//                .redirectToHttps(redirect -> redirect
+//                        .httpsRedirectWhen(e -> true) // Все запросы перенаправлять на HTTPS
+//                )
                 .build();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(List.of("https://se.ifmo.ru", "https://se.ifmo.ru")); // или конкретные домены
+        configuration.setAllowedOriginPatterns(List.of(
+                "https://se.ifmo.ru",
+                "http://se.ifmo.ru",
+                "http://localhost:5173",
+                "https://localhost:*"
+        ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
 //        configuration.setAllowCredentials(true);

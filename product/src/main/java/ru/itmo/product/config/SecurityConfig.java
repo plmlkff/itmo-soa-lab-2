@@ -20,7 +20,8 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(configurer ->
                         configurer.requestMatchers("/**").permitAll()
-                ).requiresChannel(channel -> channel.anyRequest().requiresSecure())
+                )
+//            .requiresChannel(channel -> channel.anyRequest().requiresSecure())
                 .build();
     }
 }
