@@ -1,7 +1,7 @@
 server:
   error:
     include-message: always
-  port: 8083
+  port: 8085
   ssl:
     key-store: classpath:localhost.p12
     key-store-password: storepassword
