@@ -34,3 +34,4 @@ public class EbayFilterController {
         return ebayFilterService.getProductsByPriceRange(priceFrom, priceTo);
     }
 }
+

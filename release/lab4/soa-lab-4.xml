@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+	http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+	http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" >
+		<http:listener-connection host="0.0.0.0" port="8080" />
+	</http:listener-config>
+
+	<http:request-config name="Consul_Request_Config" doc:name="Consul Request Config" >
+		<http:request-connection host="localhost" port="8500" />
+	</http:request-config>
+
+	<http:request-config name="HAProxy_Config" doc:name="HAProxy Config" >
+		<http:request-connection host="localhost" port="8081" />
+	</http:request-config>
+
+	<http:request-config name="Dynamic_Product_Request" doc:name="Dynamic Product Request" >
+		<http:request-connection host="#[vars.targetHost]" port="#[vars.targetPort]" />
+	</http:request-config>
+
+	<flow name="api-gateway-flow" >
+		<http:listener doc:name="Listener" config-ref="HTTP_Listener_config" path="/api/*"/>
+		
+		<set-variable value="#[attributes.requestPath]" doc:name="Set Original Path" variableName="originalPath"/>
+		<set-variable value="#[attributes.method]" doc:name="Set Method" variableName="originalMethod"/>
+		
+		<choice doc:name="Route by Service" >
+		
+			<!-- === ВЕТКА EBAY (через HAProxy) === -->
+			<when expression="#[attributes.requestPath startsWith '/api/ebay']">
+				<logger level="INFO" doc:name="Log Ebay" message="Routing to Ebay via HAProxy..."/>
+				<http:request method="#[vars.originalMethod]" doc:name="Call HAProxy" config-ref="HAProxy_Config" path="#[vars.originalPath]">
+					<http:headers ><![CDATA[#[attributes.headers]]]></http:headers>
+					<http:query-params ><![CDATA[#[attributes.queryParams]]]></http:query-params>
+				</http:request>
+			</when>
+
+			<when expression="#[attributes.requestPath startsWith '/api/products']">
+				<logger level="INFO" doc:name="Log Product" message="Resolving Product Service via Consul..."/>
+				
+				<http:request method="GET" doc:name="Get Healthy Services from Consul" config-ref="Consul_Request_Config" path="/v1/health/service/product-service">
+					<http:query-params ><![CDATA[#[output application/java
+---
+{
+	"passing" : "true"
+}]]]></http:query-params>
+				</http:request>
+				
+				<!-- ШАГ 2: Выбираем один инстанс (DataWeave) -->
+				<ee:transform doc:name="Select Instance" doc:id="7a3c906d-e692-4b11-b7bb-41f65a2aece4">
+					<ee:message >
+					</ee:message>
+					<ee:variables >
+						<ee:set-variable variableName="targetHost" ><![CDATA[%dw 2.0
+output application/java
+import * from dw::core::Arrays
+var serviceNode = payload[0].Service
+---
+serviceNode.Address]]></ee:set-variable>
+						<ee:set-variable variableName="targetPort" ><![CDATA[%dw 2.0
+output application/java
+var serviceNode = payload[0].Service
+---
+serviceNode.Port]]></ee:set-variable>
+					</ee:variables>
+				</ee:transform>
+
+				<logger level="INFO" doc:name="Log Selected Node" message="#['Selected Product Node: ' ++ vars.targetHost ++ ':' ++ vars.targetPort]"/>
+
+				<http:request method="#[vars.originalMethod]" doc:name="Call Product Instance" config-ref="Dynamic_Product_Request" path="#[vars.originalPath]">
+				</http:request>
+			</when>
+			
+			<otherwise >
+				<set-payload value="Service not found" doc:name="404"/>
+				<set-variable value="404" doc:name="Set Status" variableName="httpStatus"/>
+			</otherwise>
+		</choice>
+	</flow>
+</mule>

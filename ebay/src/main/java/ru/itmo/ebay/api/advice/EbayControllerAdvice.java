@@ -14,3 +14,4 @@ public class EbayControllerAdvice {
         return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("Remote service isn't available now!");
     }
 }
+

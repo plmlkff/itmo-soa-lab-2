@@ -9,6 +9,12 @@ project(":product").projectDir = file("product")
 include(":ebay")
 project(":ebay").projectDir = file("ebay")
 
+include(":ebay-soap")
+project(":ebay-soap").projectDir = file("ebay-soap")
+
+include(":ebay-proxy")
+project(":ebay-proxy").projectDir = file("ebay-proxy")
+
 include(":gateway")
 project(":gateway").projectDir = file("gateway")
 

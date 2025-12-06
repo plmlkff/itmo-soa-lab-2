@@ -16,7 +16,6 @@ dependencies{
     annotationProcessor("org.projectlombok:lombok")
 }
 
-// Build as plain JAR, not Spring Boot executable JAR
 tasks.named<Jar>("jar") {
     enabled = true
 }

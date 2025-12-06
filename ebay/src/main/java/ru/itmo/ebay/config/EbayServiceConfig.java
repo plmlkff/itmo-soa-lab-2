@@ -57,7 +57,6 @@ public class EbayServiceConfig {
                 )
                 .build();
 
-        // Создаем request factory
         HttpComponentsClientHttpRequestFactory requestFactory =
                 new HttpComponentsClientHttpRequestFactory(client);
 
@@ -86,3 +85,4 @@ public class EbayServiceConfig {
         }
     }
 }
+

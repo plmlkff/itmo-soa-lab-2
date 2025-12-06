@@ -24,7 +24,6 @@ dependencies {
     
     providedCompile("jakarta.json.bind:jakarta.json.bind-api:3.0.0")
     
-    // Jackson dependencies for JSON serialization
     implementation("com.fasterxml.jackson.core:jackson-databind:2.15.3")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.3")
     implementation("com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-json-provider:2.15.3")

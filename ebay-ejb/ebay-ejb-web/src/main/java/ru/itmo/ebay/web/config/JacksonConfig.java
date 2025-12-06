@@ -13,9 +13,7 @@ public class JacksonConfig implements ContextResolver<ObjectMapper> {
     
     public JacksonConfig() {
         this.objectMapper = new ObjectMapper();
-        // Register JSR310 module for Java 8 date/time support
         this.objectMapper.registerModule(new JavaTimeModule());
-        // Disable writing dates as timestamps
         this.objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     }
     

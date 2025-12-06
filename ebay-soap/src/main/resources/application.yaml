@@ -1,0 +1,23 @@
+server:
+  port: 8091
+  ssl:
+    key-store: classpath:localhost.p12
+    key-store-password: storepassword
+    key-alias: localhost
+    trust-store: classpath:truststore.p12
+    trust-store-password: trustpassword
+    enabled: false
+  error:
+    include-message: always
+services:
+  product:
+    baseUrl: "http://localhost:8080"
+cxf:
+  path: /services
+springdoc:
+  api-docs:
+    path: '/v3/api-docs'
+    enabled: true
+  swagger-ui:
+    path: '/swagger-ui.html'
+    enabled: true
